@@ -2,7 +2,7 @@ name: oneCCL
 'on':
   push:
     branches:
-      - kp-add-doc-publish
+      - kp-doc-publish-workflow
   workflow_dispatch:
 
 jobs:
