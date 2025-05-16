@@ -24,4 +24,4 @@ jobs:
         . .venv/bin/activate
         cd doc
         doxygen Doxyfile
-        sphinx-build -b html -d doctrees doc/rst/source build/html
+        sphinx-build -b html -d doctrees rst/source build/html
