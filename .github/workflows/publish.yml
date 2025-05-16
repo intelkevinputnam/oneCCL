@@ -1,0 +1,27 @@
+name: oneCCL
+'on':
+  push:
+    branches:
+      - kp-add-doc-publish
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    container: ubuntu
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: install dependencies
+      run: |
+        apt-get update
+        DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y python3-setuptools python3-pip wget python3.12-venv doxygen texlive-extra-utils texlive-latex-extra texlive-science dvipng
+        python3 -m venv .venv
+        . .venv/bin/activate
+        pip3 install -r doc/requirements.txt
+    - name: build docs
+      run: |
+        . .venv/bin/activate
+        cd doc
+        doxygen Doxyfile
+        sphinx-build -b html -d doctrees doc/rst/source build/html
